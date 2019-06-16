@@ -1,0 +1,27 @@
+Layer Pattern should follow the form: 
+    INPUT => [[CONV => RELU]*N => POOL?] => [FC => RELU]*K => FC
+    where: 0 <= N <= 3
+           0 <= K <= 2
+
+- Common input layer sizes include 32x32, 64x64, 96x96, 224x224, 227x227 and 229x229
+
+- Secondly, the input layer should also be divisible by two multiple times 
+    after the first CONV operation is applied. You can do this by tweaking 
+    your filter size and stride. The “divisible by two rule" enables the 
+    spatial inputs in our network to be conveniently down sampled via 
+    POOL operation in an efficient manner.
+- use smaller filter sizes such as 3x3 and 5x5. Tiny 1x1 filters are 
+    used to learn local features. Larger filter sizes such as 7x7 
+    and 11x11 may be used as the first CONV layer in the network (to
+    reduce spatial input size, provided your images are sufficiently 
+    larger than > 200x200 pixels, however, after this initial CONV layer 
+    the filter size should drop dramatically, otherwise you will
+    reduce the spatial dimensions of your volume too quickly.
+- Likewise, S=1 for small input images and S=2 for large input images.
+
+- apply zero-padding to CONV layers to ensure the output dimension size 
+    matches the input dimension size
+
+- apply dropout in between FC layers with a dropout probability of 50%, 
+    and include dropout layers (with a very small probability, 10-25%) 
+    between POOL and CONV layers.
