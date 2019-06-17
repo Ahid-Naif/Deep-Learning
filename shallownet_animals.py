@@ -13,7 +13,8 @@ datasetPath = "datasets/animals"
 newWidth  = 32
 newHeight = 32
 channels  = 3
-classes  = ["cat", "dog", "panda"]
+classes   = ["cat", "dog", "panda"]
+numEpochs = 100
 
 # grab the list of images that we’ll be describing
 print("[INFO] loading images...")
@@ -49,7 +50,7 @@ model.compile(loss="categorical_crossentropy", optimizer=opt,
 # train the network
 print("[INFO] training network...")
 history = model.fit(trainX, trainY, validation_data=(testX, testY),
-                        batch_size=32, epochs=100, verbose=1)
+                        batch_size=32, epochs=numEpochs, verbose=1)
 
 # save the network to disk
 print("[INFO] serializing network...")
@@ -61,4 +62,4 @@ predictions = model.predict(testX, batch_size=32)
 print(classification_report(testY.argmax(axis=1), predictions.argmax(axis=1),
                                 target_names=classes))
 
-plotHistory(history)
+plotHistory(history, numEpochs)

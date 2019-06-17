@@ -7,6 +7,8 @@ from keras.optimizers import SGD
 from sklearn import datasets
 from utils import plotHistory
 
+numEpochs = 100
+
 print("[INFO] loading MNIST (full) dataset...")
 dataset = datasets.fetch_openml("mnist_784")
 
@@ -32,7 +34,7 @@ print("[INFO] training network...")
 sgd = SGD(0.01)
 model.compile(loss="categorical_crossentropy", optimizer=sgd, metrics=["accuracy"])
 history = model.fit(trainX, trainY, validation_data=(testX, testY), 
-                epochs=100, batch_size=128)
+                epochs=numEpochs, batch_size=128)
 
 # evaluate the network
 print("[INFO] evaluating network...")
@@ -41,4 +43,4 @@ print(classification_report(testY.argmax(axis=1), predictions.argmax(axis=1),
         target_names=[str(x) for x in labelBinarizer.classes_]))
 
 # plot the training loss and accuracy
-plotHistory(history)
+plotHistory(history, numEpochs)

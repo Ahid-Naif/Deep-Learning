@@ -15,9 +15,10 @@ trainX = trainX.astype("float") / 255.0
 testX  = testX.astype("float") / 255.0
 
 # get dimensions of images in the dataset
-height  = trainX.shape[1]
-width   = trainX.shape[2]
-channel = trainX.shape[3]
+height    = trainX.shape[1]
+width     = trainX.shape[2]
+channel   = trainX.shape[3]
+numEpochs = 100
 
 # reshape the data matrix so that each row represents an image
 trainX = trainX.reshape((trainX.shape[0], height*width*channel))
@@ -44,7 +45,7 @@ sgd = SGD(0.01)
 model.compile(loss="categorical_crossentropy", optimizer=sgd,
                 metrics=["accuracy"])
 history = model.fit(trainX, trainY, validation_data=(testX, testY),
-                    epochs=100, batch_size=32)
+                    epochs=numEpochs, batch_size=32)
 
 # evaluate the network
 print("[INFO] evaluating network...")
@@ -53,4 +54,4 @@ print(classification_report(testY.argmax(axis=1),
         predictions.argmax(axis=1), target_names= labelNames))
 
 # plot the training loss and accuracy
-plotHistory(history)
+plotHistory(history, numEpochs)
