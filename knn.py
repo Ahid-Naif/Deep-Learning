@@ -6,7 +6,7 @@ from preprocessing import SimplePreprocessor
 from dataset import SimpleDatasetLoader
 from imutils import paths
 
-dataset = "Image_Classifier/datasets/animals"
+dataset = "datasets/animals"
 n_neighbors = 1
 # declaring dimensions of the preprocessing
 newWidth = 32
