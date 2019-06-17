@@ -51,6 +51,10 @@ print("[INFO] training network...")
 history = model.fit(trainX, trainY, validation_data=(testX, testY),
                         batch_size=32, epochs=100, verbose=1)
 
+# save the network to disk
+print("[INFO] serializing network...")
+model.save("shallownet_weights.hdf5")
+
 # evaluate the network
 print("[INFO] evaluating network...")
 predictions = model.predict(testX, batch_size=32)
