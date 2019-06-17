@@ -18,7 +18,6 @@ testX  = testX.astype("float") / 255.0
 height  = trainX.shape[1]
 width   = trainX.shape[2]
 channel = trainX.shape[3]
-print(height.shape)
 
 # reshape the data matrix so that each row represents an image
 trainX = trainX.reshape((trainX.shape[0], height*width*channel))
