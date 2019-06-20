@@ -15,7 +15,7 @@ class ShallowNet:
         if K.image_data_format == "channels_first":
             inputShape = (depth, height, width)
         
-        # define the first (and only) CONV => RELU layer
+        # define the model
         model.add(Conv2D(32, (3,3), padding="same",
                     input_shape=inputShape))
         model.add(Activation("relu"))
