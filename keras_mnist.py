@@ -11,12 +11,14 @@ numEpochs = 100
 
 print("[INFO] loading MNIST (full) dataset...")
 dataset = datasets.fetch_openml("mnist_784")
+data    = dataset["data"]
+target  = dataset["target"]
 
 # scale the raw pixel intensities to the range [0, 1.0]
-data = dataset.data.astype("float") / 255.0
+data = data.astype("float") / 255.0
 
 # construct the training and testing splits
-trainX, testX, trainY, testY = train_test_split(data, dataset.target, test_size=0.25)
+trainX, testX, trainY, testY = train_test_split(data, target, test_size=0.25)
 
 # convert the labels from integers to vectors / hot-encoding
 labelBinarizer = LabelBinarizer()
